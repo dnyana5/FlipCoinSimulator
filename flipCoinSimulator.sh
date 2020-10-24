@@ -1,3 +1,9 @@
 #!/bin/bash
-
-echo "Welcome to the Flip Coin Simulator Program on master Branch"
+#coin toss
+coinToss=$((RANDOM%2))
+if [ $coinToss == 0 ]
+then
+   echo "Heads"
+else
+   echo "Tails"
+fi
