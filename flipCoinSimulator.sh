@@ -5,7 +5,7 @@ count=0
 heads=0
 tails=o
 
-while [[ $heads -lt 21 && $tails -lt 21 ]]
+while [[ $heads -lt 21 || $tails -lt 21 ]]
 do
    flip=$((RANDOM%2))
 
@@ -23,14 +23,24 @@ echo "HEAD_WON "$heads "times"
 echo "TAIL_WON "$tails "times"
 
 
-if [ $tails == $heads ]
+if [ $tails != $heads ]
 then
-   echo "match tie"
+   echo "Match is not tied"
 else
-   if [ $tails == 21 ]
+   echo "It's a tie"
+   echo "Game continues..."
+   while [[ $((heads-tails)) -lt 2 ]]
+   do
+      flip=$((RANDOM%2))
+
+   if [ $flip -eq 1 ]
    then
-      echo "TAIL WON by "$((tails-heads))
+      (( heads++ ))
    else
-      echo "HEAD WON by "$((heads-tails))
+      (( tails++ ))
    fi
+      ((count++))
+   done
+echo "Tail="$tails
+echo "Head="$heads
 fi
